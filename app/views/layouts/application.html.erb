@@ -31,6 +31,74 @@
     
 
   <body>
+    <% if flash[:notice] %>
+      <div class="alert alert-success">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert alert-danger">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <!-- Lien vers l'accueil -->
+    <a class="navbar-brand" href="#">Accueil</a>
+
+    <!-- Bouton hamburger pour mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <!-- Lien vers la liste des événements -->
+        <li class="nav-item">
+          <a class="nav-link" href="<%= events_path %>">Liste des événements</a>
+        </li>
+
+        <!-- Lien vers la création d'un événement -->
+        <li class="nav-item">
+          <a class="nav-link" href="<%= new_event_path %>">Créer un événement</a>
+        </li>
+
+        <!-- Dropdown pour profil (visiteur ou utilisateur connecté) -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <% if user_signed_in? %>
+              Mon profil
+            <% else %>
+              S'inscrire / Se connecter
+            <% end %>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% if user_signed_in? %>
+              <li><a class="dropdown-item" href="<%= user_path(current_user) %>">Mon profil</a></li>
+              <li>
+  <%= form_with url: destroy_user_session_path, method: :delete, class: "d-inline" do %>
+    <%= submit_tag "Se déconnecter", class: "dropdown-item" %>
+  <% end %>
+</li>
+
+            <% else %>
+              <li><a class="dropdown-item" href="<%=new_user_registration_path %>">S'inscrire</a></li>
+              <li><a class="dropdown-item" href="<%=new_user_session_path%>">Se connecter</a></li>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
     <%= yield %>
   </body>
 </html>

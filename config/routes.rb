@@ -16,10 +16,18 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
  
-  resources :events, only: [:new, :create, :index, :show]
+  resources :events, only: [:new, :create, :index, :show] do
+    resources :attendances, only: [:new, :index]
+  end
   resources :users, only: [:show]
 
   root "events#index"
+
+  scope '/checkout' do
+    post 'create', to: 'checkout#create', as: 'checkout_create'
+    get 'success', to: 'checkout#success', as: 'checkout_success'
+    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
+end
 
 
 

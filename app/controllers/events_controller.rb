@@ -1,7 +1,16 @@
 class EventsController < ApplicationController
   
   def show
-    
+    @event = Event.find(params[:id])
+    @title = @event.title
+    @description = @event.description
+    @price = @event.price
+    @admin = @event.admin
+    @particip = @event.participants.include?(current_user)
+    puts "#"*60
+    puts @particip
+    puts @event.participants
+    puts "#"*60
   end
 
   def index

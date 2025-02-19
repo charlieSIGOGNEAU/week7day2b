@@ -1,7 +1,5 @@
-<h1> index de event qui sera ma page d'accuil</h1>
-
 <% @events.each do |event|%>
-  <li>titre de l'evenement: <%=event.title%>
+  <li> <%= link_to "titre de l'evenement: #{event.title}", event_path(event.id) %>
   <br>déscription : <%=event.description%>
   <br>prix: <%=event.price%>
   <br>lieu: <%=event.location%>

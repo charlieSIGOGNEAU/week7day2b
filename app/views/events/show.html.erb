@@ -1,1 +1,12 @@
-<p> la show </p>
+<p> Titre de l'evenement <%= @title%></p>
+<p> Description de l'evenement : <%= @description%></p>
+<p> tarif : <%= @price%></p>
+<% if user_signed_in? && current_user == @admin %>
+  <p> est admin</p>
+  
+<% elsif @particip %>
+  <p> vous participez deja a cette evenement </p>
+<% else%>
+  <p> n'est pas admin </p>
+  <%= link_to "Rejoindre l'événement", new_event_attendance_path(@event), class: "btn btn-primary" %>
+<% end%>

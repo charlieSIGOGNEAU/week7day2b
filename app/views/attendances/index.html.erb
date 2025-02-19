@@ -1,0 +1,4 @@
+<p>index attendance</p>
+<%=@attendances.each do |attendance| %>
+<li> <%= attendance.user.last_name%> </li>
+<% end%>

@@ -18,9 +18,13 @@
     </div>
   <% end %>
 
+    <%= f.file_field :avatar %>
+
+
   <div class="actions">
     <%= f.submit "Log in" %>
   </div>
-<% end %>
+  <% end %>
+
 
 <%= render "devise/shared/links" %>

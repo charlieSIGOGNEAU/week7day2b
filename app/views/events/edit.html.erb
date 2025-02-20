@@ -1,0 +1,42 @@
+<h1>Modifier l'événement</h1>
+
+<%= form_with(model: @event, url: event_path(@event), method: :patch) do |f| %>
+  <div>
+    <%= f.label :title, "Titre de l'événement" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :start_date, "Date de début" %>
+    <%= f.datetime_select :start_date %>
+  </div>
+
+  <div>
+    <%= f.label :duration, "Durée (minutes)" %>
+    <%= f.number_field :duration %>
+  </div>
+
+  <div>
+    <%= f.label :price, "Prix (€)" %>
+    <%= f.number_field :price %>
+  </div>
+
+  <div>
+    <%= f.label :location, "Lieu" %>
+    <%= f.text_field :location %>
+  </div>
+
+  <div>
+    <%= f.submit "Mettre à jour l'événement" %>
+  </div>
+<% end %>
+
+<%= button_to 'Supprimer l\'événement', event_path(@event), method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer cet événement ?' } %>
+
+
+

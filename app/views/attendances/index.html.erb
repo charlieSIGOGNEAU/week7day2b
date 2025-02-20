@@ -1,4 +1,17 @@
 <p>index attendance</p>
-<%=@attendances.each do |attendance| %>
-<li> <%= attendance.user.last_name%> </li>
+<%@attendances.each do |attendance| %>
+<li> <%= attendance.user.email%> </li>
 <% end%>
+<%= link_to "Modifier l'événement", edit_event_path(@event), class: "btn btn-primary" %>
+
+<%if @event.avatar.attached?%>
+  <%= image_tag @event.avatar, alt: 'avatar', class: 'w-50 mx-auto d-block' %>
+<%else%>
+  <p>=== Il n'y a pas encore d'avatar lié à cet utilisateur ===</p>
+<%end%>
+
+<h3>changer / ajouter une image</h3>
+<%= form_tag event_avatars_path(@event), multipart: true do %>
+  <%= file_field_tag :avatar %>
+  <%= submit_tag "mettre à jour" %>
+<% end %>

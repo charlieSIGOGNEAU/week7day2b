@@ -1,2 +1,14 @@
 
 <p>voila ton mail : <%= @user.email %></p>
+
+<%if @user.avatar.attached?%>
+  <%= image_tag @user.avatar, alt: 'avatar', class: 'w-50 mx-auto d-block' %>
+<%else%>
+  <p>=== Il n'y a pas encore d'avatar lié à cet utilisateur ===</p>
+<%end%>
+
+<h3>changer / ajouter une image</h3>
+<%= form_tag user_avatars_path(@user), multipart: true do %>
+  <%= file_field_tag :avatar %>
+  <%= submit_tag "mettre à jour" %>
+<% end %>

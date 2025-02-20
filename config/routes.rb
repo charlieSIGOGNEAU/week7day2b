@@ -16,10 +16,14 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
  
-  resources :events, only: [:new, :create, :index, :show] do
+  resources :events do
     resources :attendances, only: [:new, :index]
+    resources :avatars, only: [:create]
   end
-  resources :users, only: [:show]
+  
+  resources :users, only: [:show] do
+    resources :avatars, only: [:create]
+  end
 
   root "events#index"
 
